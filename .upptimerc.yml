@@ -34,7 +34,7 @@ status-website:
   favicon: https://deep.navy/icons/192.png
   theme: dark
   introTitle: 'Service status'
-  introMessage: 'Measured availability from scheduled external checks. The MCP edge check verifies rejection of unauthenticated requests, not authenticated tool execution. API catalog checks do not prove every dataset is fresh. Schedules can be delayed; inspect the latest check time and incident history.'
+  introMessage: 'Measured availability from scheduled external checks. The MCP edge check verifies rejection of unauthenticated requests, not authenticated tool execution. The separate [hourly authenticated MCP check](https://github.com/deep-navy/status/actions/workflows/mcp-semantic.yml?query=branch%3Amaster) executes a restricted catalog tool and validates its result: [![Authenticated MCP check](https://github.com/deep-navy/status/actions/workflows/mcp-semantic.yml/badge.svg?branch=master&event=schedule)](https://github.com/deep-navy/status/actions/workflows/mcp-semantic.yml?query=branch%3Amaster). Its workflow result is separate from the Upptime incident history below. API catalog checks do not prove every dataset is fresh. Schedules can be delayed; inspect the latest check time and incident history.'
   navbar:
     - title: Status
       href: /
