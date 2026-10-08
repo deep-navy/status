@@ -19,3 +19,11 @@ Automatic Setup, Updates and Update Template workflows are deliberately removed:
 After provisioning, push the prepared configuration, run Uptime CI, Summary CI, Graphs CI and Static Site CI. Verify Deploy status to Pages succeeds, check the latest timestamps and exercise a temporary failing test endpoint before removing it. Never seed healthy measurements or incidents. Upptime owns its generated workflows; put custom deployment in its separate file.
 
 Sources: [configuration](https://upptime.js.org/docs/configuration/), [template](https://github.com/upptime/upptime), [GitHub Pages custom workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
+
+## Activation verified
+
+Runtime jobs use explicit per-workflow permissions and the repository default is read-only. The Pages environment permits the actual `master` workflow branch through `github_repository_environment_deployment_policy.status_pages`; the workflow checks out generated `gh-pages` content.
+
+IaC activation: initialize `infra/tofu/github` and `infra/tofu/aws` with the shared backend and their existing stack keys; inspect plans for `github_repository.status`, `github_workflow_repository_permissions.status`, `github_repository_pages.status`, `github_repository_environment_deployment_policy.status_pages` and `aws_route53_record.status`. Do not apply unrelated drift. New Pages domains need certificate issuance before HTTPS enforcement. Provider v6.13.0's initial domain/HTTPS update may need a second refresh/apply after issuance; verify both CNAME and HTTPS together afterward. Desired steady state is always `status.deep.navy` with HTTPS enforced.
+
+Start runtime workflows sequentially: Uptime CI, Summary CI, Graphs CI, Static Site CI. Wait for each success: Upptime shares a concurrency group and dispatching several at once can replace a pending run. The site build triggers Deploy status to Pages automatically. Confirm actual page content and latest measurements, not merely a successful build.
