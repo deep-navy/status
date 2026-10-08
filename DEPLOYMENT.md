@@ -5,7 +5,7 @@ Configuration lives in `.upptimerc.yml`. There are no historical measurements un
 
 ## Scope
 
-Website HTTP availability, a body-checked public Connect catalog request, MCP unauthenticated rejection, and OAuth resource metadata. The MCP check expects 401 deliberately and does not measure authenticated tool execution, dataset freshness or billing correctness. No customer credentials are used.
+Website HTTP availability, a body-checked public Connect catalog request, MCP unauthenticated rejection, and OAuth resource metadata. The MCP check expects 401 deliberately and does not measure authenticated tool execution, dataset freshness or billing correctness. These four Upptime checks use no credentials. A [separate hourly semantic MCP check](AUTHENTICATED-CHECK.md) uses a dedicated synthetic account and validates one local catalog tool result; its workflow badge is separate from Upptime incident history.
 
 Every detected incident is retained (`skipDeleteIssues: true`). GitHub Actions schedules are best effort; outages between checks can be missed. Incident maintainers can add impact, investigation and resolution updates using GitHub Issues. Do not put customer identifiers, credentials or request contents in this public repository.
 

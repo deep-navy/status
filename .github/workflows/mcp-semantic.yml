@@ -1,0 +1,40 @@
+# Separate semantic check: Upptime's native body checks are literal substring matches.
+# No custom HTTP service; GitHub owns scheduling, results and the public workflow badge.
+name: Authenticated MCP check
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - scripts/mcp_probe.py
+      - tests/test_mcp_probe.py
+      - .github/workflows/mcp-semantic.yml
+permissions:
+  contents: read
+concurrency:
+  group: authenticated-mcp-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - run: python3 -m unittest discover -s tests -v
+  probe:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
+    needs: tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    environment: status-monitor
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Check authenticated MCP catalog execution
+        env:
+          DEEPNAVY_STATUS_KEY: ${{ secrets.DEEPNAVY_STATUS_KEY }}
+        run: python3 scripts/mcp_probe.py
