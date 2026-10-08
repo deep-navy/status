@@ -1,31 +1,46 @@
-# Change these first
-owner: upptime # Your GitHub organization or username, where this repository lives
-repo: upptime # The name of this repository
-
+# Docs: https://upptime.js.org/docs/configuration/
+owner: deep-navy
+repo: status
+user-agent: deep-navy
+secrets: []
+skipDeleteIssues: true
 sites:
-  - name: Google
-    url: https://www.google.com
-  - name: Wikipedia
-    url: https://en.wikipedia.org
-  - name: Hacker News
-    url: https://news.ycombinator.com
-  - name: Secret Site
-    url: $SECRET_SITE
-
+  - name: Customer website
+    slug: website
+    url: https://deep.navy/
+    expectedStatusCodes: [200]
+  - name: Public API catalog
+    slug: api
+    url: https://api.deep.navy/deepnavy.catalog.v1.CatalogService/ListTools
+    method: POST
+    headers:
+      - "Content-Type: application/json"
+    body: '{}'
+    expectedStatusCodes: [200]
+    __dangerous__body_down_if_text_missing: '"tools"'
+  - name: MCP authentication edge
+    slug: mcp-edge
+    url: https://mcp.deep.navy/mcp
+    expectedStatusCodes: [401]
+  - name: OAuth resource discovery
+    slug: oauth-discovery
+    url: https://mcp.deep.navy/.well-known/oauth-protected-resource
+    expectedStatusCodes: [200]
+    __dangerous__body_down_if_text_missing: '"authorization_servers"'
 status-website:
-  # Add your custom domain name, or remove the `cname` line if you don't have a domain
-  # Uncomment the `baseUrl` line if you don't have a custom domain and add your repo name there
-  cname: demo.upptime.js.org
-  # baseUrl: /your-repo-name
-  logoUrl: https://raw.githubusercontent.com/upptime/upptime.js.org/master/static/img/icon.svg
-  name: Upptime
-  introTitle: "**Upptime** is the open-source uptime monitor and status page, powered entirely by GitHub."
-  introMessage: This is a sample status page which uses **real-time** data from our [GitHub repository](https://github.com/upptime/upptime). No server required — just GitHub Actions, Issues, and Pages. [**Get your own for free**](https://github.com/upptime/upptime)
+  cname: status.deep.navy
+  name: deep.navy status
+  logoUrl: https://deep.navy/icons/120.png
+  favicon: https://deep.navy/icons/120.png
+  theme: dark
+  introTitle: 'Service status'
+  introMessage: 'Measured availability from scheduled external checks. The MCP edge check verifies rejection of unauthenticated requests, not authenticated tool execution. API catalog checks do not prove every dataset is fresh. Schedules can be delayed; inspect the latest check time and incident history.'
   navbar:
     - title: Status
       href: /
-    - title: GitHub
-      href: https://github.com/$OWNER/$REPO
-
-# Upptime also supports notifications, assigning issues, and more
-# See https://upptime.js.org/docs/configuration
+    - title: Incidents
+      href: https://github.com/deep-navy/status/issues
+    - title: Documentation
+      href: https://deep.navy/docs
+# Upptime owns its generated workflows. This separate workflow deploys the generated
+# gh-pages output through GitHub's official artifact deploy, without a personal token.

@@ -1,0 +1,33 @@
+name: Deploy status to Pages
+on:
+  workflow_run:
+    workflows: [Static Site CI, Setup CI]
+    types: [completed]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: status-pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    if: github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_repository.full_name == github.repository)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: gh-pages
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: .
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
