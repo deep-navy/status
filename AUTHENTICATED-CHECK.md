@@ -110,3 +110,28 @@ passed; the shown-once key went directly to the GitHub environment secret. No pa
 or session was persisted. The chosen hourly cadence still fits Free when preview ends.
 
 The Cognito [password choice flow](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-authentication-flow-methods.html) passes PASSWORD together with PREFERRED_CHALLENGE=PASSWORD; authentication may return tokens immediately.
+
+## After a release adds tools
+
+New tools default to enabled for existing customers. After the migration is live,
+reconcile the dedicated synthetic account through its ordinary ToolSettingsService
+API, then dispatch one `Authenticated MCP check` run. Do not change database rows,
+rotate the installed key, borrow a customer's credential or weaken the probe's
+exact tool-list check.
+
+```sh
+python3 scripts/reconcile_status_tools.py \
+  --pool-id POOL --client-id WEBSITE_CLIENT \
+  --require-tool monitor_poll --require-tool monitor_ack
+```
+
+This operator-only script is fixed to `status-monitor@deep.navy`. It requires the
+normal operator AWS profile and boto3, resets only that synthetic user's password
+to an in-memory random value, signs in through the website client, and disables
+all tools except `energy_search`. It sends no email and retains no password/session.
+`--require-tool` refuses tool changes until each named migrated tool exists. It
+compares the existing API-key inventory before/after and never calls key creation,
+revocation or updates. The existing GitHub environment secret remains valid.
+
+This is a release operator step, not scheduled auto-remediation: broader access
+continues to fail the public synthetic check until explicitly reconciled.
