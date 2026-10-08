@@ -24,6 +24,9 @@ on:
   repository_dispatch:
     types: [static_site]
   workflow_dispatch:
+permissions:
+  contents: write
+  issues: read
 concurrency:
   group: ${{ github.repository }}-${{ github.head_ref || github.ref_name }}-upptime
   cancel-in-progress: false
