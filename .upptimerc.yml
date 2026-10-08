@@ -30,8 +30,8 @@ sites:
 status-website:
   cname: status.deep.navy
   name: deep.navy status
-  logoUrl: https://deep.navy/icons/120.png
-  favicon: https://deep.navy/icons/120.png
+  logoUrl: https://deep.navy/icons/192.png
+  favicon: https://deep.navy/icons/192.png
   theme: dark
   introTitle: 'Service status'
   introMessage: 'Measured availability from scheduled external checks. The MCP edge check verifies rejection of unauthenticated requests, not authenticated tool execution. API catalog checks do not prove every dataset is fresh. Schedules can be delayed; inspect the latest check time and incident history.'
