@@ -1,7 +1,7 @@
 url: https://api.deep.navy/deepnavy.catalog.v1.CatalogService/ListTools
-status: up
-code: 200
-responseTime: 292
-lastUpdated: 2026-11-21T03:43:19.208Z
+status: down
+code: 404
+responseTime: 583
+lastUpdated: 2026-11-21T12:28:08.205Z
 startTime: 2026-10-08T00:31:51.556Z
 generator: Upptime <https://github.com/upptime/upptime>
