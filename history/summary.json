@@ -10,11 +10,11 @@
     "uptimeWeek": "100.00%",
     "uptimeMonth": "100.00%",
     "uptimeYear": "100.00%",
-    "time": 427,
-    "timeDay": 326,
-    "timeWeek": 352,
-    "timeMonth": 442,
-    "timeYear": 427,
+    "time": 421,
+    "timeDay": 129,
+    "timeWeek": 303,
+    "timeMonth": 431,
+    "timeYear": 421,
     "dailyMinutesDown": {}
   },
   {
@@ -23,17 +23,20 @@
     "icon": "https://icons.duckduckgo.com/ip3/api.deep.navy.ico",
     "slug": "api",
     "status": "down",
-    "uptime": "100.00%",
-    "uptimeDay": "100.00%",
-    "uptimeWeek": "100.00%",
-    "uptimeMonth": "100.00%",
-    "uptimeYear": "100.00%",
-    "time": 385,
-    "timeDay": 438,
-    "timeWeek": 353,
-    "timeMonth": 395,
-    "timeYear": 385,
-    "dailyMinutesDown": {}
+    "uptime": "98.46%",
+    "uptimeDay": "30.55%",
+    "uptimeWeek": "90.08%",
+    "uptimeMonth": "97.72%",
+    "uptimeYear": "98.46%",
+    "time": 377,
+    "timeDay": 298,
+    "timeWeek": 296,
+    "timeMonth": 383,
+    "timeYear": 377,
+    "dailyMinutesDown": {
+      "2026-11-22": 308,
+      "2026-11-21": 692
+    }
   },
   {
     "name": "MCP authentication edge",
@@ -46,11 +49,11 @@
     "uptimeWeek": "100.00%",
     "uptimeMonth": "100.00%",
     "uptimeYear": "100.00%",
-    "time": 359,
-    "timeDay": 279,
-    "timeWeek": 405,
-    "timeMonth": 381,
-    "timeYear": 359,
+    "time": 353,
+    "timeDay": 84,
+    "timeWeek": 339,
+    "timeMonth": 375,
+    "timeYear": 353,
     "dailyMinutesDown": {}
   },
   {
@@ -64,11 +67,11 @@
     "uptimeWeek": "100.00%",
     "uptimeMonth": "100.00%",
     "uptimeYear": "100.00%",
-    "time": 273,
-    "timeDay": 343,
-    "timeWeek": 255,
-    "timeMonth": 252,
-    "timeYear": 273,
+    "time": 268,
+    "timeDay": 10,
+    "timeWeek": 196,
+    "timeMonth": 248,
+    "timeYear": 268,
     "dailyMinutesDown": {}
   }
 ]
